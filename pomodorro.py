@@ -57,7 +57,11 @@ class pomodorro:
     
         while t:
             mins, secs = divmod(t, 60)
+            #            (numerator and denominator)
+            # returns quotient and remindar as tuples
             timer = '{:02d}:{:02d}'.format(mins, secs)
+
+
             print(timer, end="\r")  # print over the same line (end="\r")
             time.sleep(1) # delay of 1 sec
             t -= 1
