@@ -1,59 +1,45 @@
 from datetime import datetime,timedelta
 import time 
-# import 
+from termcolor import colored
+from colorama import init
+init(autoreset = True)
+
+
 class pomodorro:
     def __init__(self):
-        pass
-
-    def setpomodorro(self):
-        pomo = input("Set Pomodorro for how many minutes?   ")
-        return pomo
-    
-    def now_and_now_time(self,flag=0):
-        """if flag = 0 it will return datetime raw
-        else it will return only time"""
+       self.pomo_focus_min = [] # to store pomo time
+       self.pomo_break_min = [] # to store total break time
         
-        now = datetime.now()
-        now_time = now.strftime("%H:%M:%S")
 
-        if flag == 0:
-            return now
-        else:
-            return now_time
-    
-    def timer(self):
-        now = datetime.now()
-        now_time = now.strftime("%H:%M:%S")
-        return now
+    def main_menu(self):
+        print(colored("\n \n \n \n 1. Pomodorro \n 2. Take a break \n 3. View Focus time \n 4. Exit Program \n \n \n \n","blue"))
+        
+#        print(colored('hello', 'red'), colored('world', 'green'))
+        
+        option = int(input("Choose option  "))
+        if option == 1:
+            self.setpomodorro()
+        elif option == 2:
+            self.breakpomo()
+        elif option == 3:
+            print(f"\n \n \n \n Total time you were focus was {sum(self.pomo_focus_min)} mins")
+            print(f"You engaed your focus in the following blocks of time \n {self.pomo_focus_min}")
+            print(f"Total break time was {sum(self.pomo_break_min)} mins")
+            print(f"You took breaks in the following blocks of time{self.pomo_break_min}\n \n \n \n")
+            self.main_menu()
 
-
-
-
-    def breakk(self):
-        break_time = int(input("How many minutes of break do you want? "))
-        time_sec = time_min*60
-        t = time_sec
-        while t:
-            mins, secs = divmod(t, 60)
-            timer = '{:02d}:{:02d}'.format(mins, secs)
-            print(timer, end="\r")  # print over the same line (end="\r")
-            time.sleep(1) # delay of 1 sec
-            t -= 1
-
-
-            # ! Code bug in breakk
-            # Start break? yes/no   yes
-#How many minutes of break do you want? 1
-# starts with 2
-# some sec/min  conversion fix needed.
-
+        elif option == 4:
+            print(colored("\n \n \n \n \n Thanks for using the program",'cyan'),colored(" \n Have a nice day! \n \n \n \n" , 'yellow'))
+            exit()
+        
             
-        
-        
+            
+
     
-    # define the countdown func.
     def countdown(self,t):
+        
         """ Enter in mins"""
+        t = t*60  # convert mins into secs
     
         while t:
             mins, secs = divmod(t, 60)
@@ -66,29 +52,26 @@ class pomodorro:
             time.sleep(1) # delay of 1 sec
             t -= 1
 
-        break_ = input("Start break? yes/no   ")
-        break_ = break_.lower()
-        if break_ == "yes":
-           self. breakk()
+    def setpomodorro(self):
+       
+        pomo_time = int(input("Set Pomodorro for how many minutes?   "))
+        self.countdown(pomo_time)
+        self.pomo_focus_min.append(pomo_time)
+        self.main_menu()
+        
 
 
-
         
-        
-        
-        
-        
+    def breakpomo(self)    :
+        break_time = int(input("Set break timer for how many minutes?  "))
+        self.countdown(break_time)
+        self.pomo_break_min.append(break_time)
+        self.main_menu()
         
         
         
                 
-             
-             
-
-         
-         
-
-        
+           
         
         
       
@@ -96,13 +79,16 @@ class pomodorro:
 
 if __name__ ==  "__main__":
    
-
     pomodorro1 = pomodorro()
-    time_min = int(input("Enter time in minutes for your pomodorro session :    "))
-#    time_sec = time_min*60
-#    pomodorro1.countdown(time_sec)
-    pomodorro1.countdown(time_min)
-    
+#    pomodorro1.setpomodorro()
+    pomodorro1.main_menu()
+#    time_min = int(input("Enter time in minutes for your pomodorro session :    "))
+#    pomodorro1.countdown(time_min)
+
+
+
+# Future scope:
+# add pause feature , pause in between the countdown
     
     
 
