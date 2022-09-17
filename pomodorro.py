@@ -23,9 +23,9 @@ class pomodorro:
             self.breakpomo()
         elif option == 3:
             print(f"\n \n \n \n Total time you were focus was {sum(self.pomo_focus_min)} mins")
-            print(f"You engaed your focus in the following blocks of time \n {self.pomo_focus_min}")
+            print(f"You engaed your focus in the following blocks of time\n {self.pomo_focus_min} (in mins)")
             print(f"Total break time was {sum(self.pomo_break_min)} mins")
-            print(f"You took breaks in the following blocks of time{self.pomo_break_min}\n \n \n \n")
+            print(f"You took breaks in the following blocks of time{self.pomo_break_min}\n \n \n \n (in mins)")
             self.main_menu()
 
         elif option == 4:
